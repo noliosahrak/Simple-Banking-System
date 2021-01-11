@@ -4,6 +4,7 @@ import random
 class Account:
     uniqueness_guard = []
 
+    @staticmethod
     def unique_ending(cls):
         ending = str(random.randint(0, 10000000000))
         if ending in cls.uniqueness_guard:
@@ -11,8 +12,8 @@ class Account:
         cls.uniqueness_guard.append(ending)
         return ending
 
-    def __init__(self):
-        ending = self.unique_ending()
+    def __init__(self, cls):
+        ending = cls.unique_ending
         if len(ending) < 10:
             ending = "0" * (10 - len(ending)) + ending
         self.number = "400000" + ending
@@ -23,7 +24,7 @@ class Account:
 
 
 def create_account():
-    new_account = Account()
+    new_account = Account(Account)
     print("Your card has been created")
     print("Your card number:")
     print(new_account.number)
